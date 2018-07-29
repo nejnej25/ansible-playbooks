@@ -1,0 +1,30 @@
+---
+
+- hosts: vms
+  tasks:
+  - name: Copy files to remote server
+    copy:
+        src: "{{ item }}"
+        dest: /root
+    with_items:
+    - "/opt/ansible-file1"
+    - "/opt/ansible-file2"
+    - "/opt/ansible-file3"
+
+  - name: Copy files to remote server and change the filename
+    copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+    with_items:
+    - {
+      src: "/opt/ansible-file1",
+      dest: "/root/received-file1"
+    }
+    - {
+      src: "/opt/ansible-file2",
+      dest: "/root/received-file2"
+    }
+    - {
+       src: "/opt/ansible-file3",
+       dest: "/root/received-file3"
+    }

@@ -1,0 +1,15 @@
+---
+
+- hosts: vms
+  tasks:
+  - name: change config
+    shell: "sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config"
+    notify:
+    - restart
+
+  handlers:
+  - name: restart
+    service:
+        name: sshd
+        state: restarted
+
